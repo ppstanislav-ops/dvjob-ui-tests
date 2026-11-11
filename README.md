@@ -85,8 +85,8 @@
 │   ├── test_footer.py
 │   ├── test_upper_menu.py
 │   ├── test_auth.py
-│   ├── test_request_candidate.py  # security-валидация (соискатель)
-│   └── test_request_employer.py   # security-валидация (работодатель)
+│   ├── test_server_validation.py  # security-валидация 2 роли (соискатель и работодатель)
+│   
 └── docs/allure/                    # скриншоты Allure-отчёта для README
 ```
 

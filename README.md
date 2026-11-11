@@ -10,7 +10,7 @@
 
 ## Чем интересен проект
 
-- **Page Object Model** с role-based локаторами (`get_by_role`, `get_by_placeholder`) —
+- **Page Object Model** с локаторами (`get_by_role`, `get_by_placeholder`) —
   устойчивыми к изменениям вёрстки.
 - **Перехват и подмена сетевых запросов** (`page.route` + `expect_response`):
   фронт отправляет валидный email, перехват подменяет поле `username` — так

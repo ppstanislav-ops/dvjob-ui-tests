@@ -1,0 +1,16 @@
+# --- Test framework runtime ---
+pytest==9.2.0
+pytest-playwright==0.10.0
+pytest-base-url==2.1.0
+pytest-rerunfailures
+
+# --- Playwright & browser automation ---
+playwright==1.64.5
+
+# --- Allure reporting ---
+allure-pytest==2.16.2
+allure-python-commons==2.16.2
+
+# --- Helpers ---
+python-dotenv==1.2.4
+requests==2.34.2

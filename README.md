@@ -64,17 +64,20 @@
 
 ##  Структура проекта
 
+## Структура проекта
+
+```text
 .
-├── conftest.py                  # фикстуры, автоскриншот при падении, файлы окружения для Allure
-├── pytest.ini                   # настройки pytest
-├── requirements.txt             # зависимости
-├── .env.example                 # шаблон для .env
+├── conftest.py                    # фикстуры, автоскриншот при падении, файлы окружения для Allure
+├── pytest.ini                     # настройки pytest
+├── requirements.txt               # зависимости
+├── .env.example                   # шаблон для .env
 │
-├── pages/                       # Page Object
+├── pages/                         # Page Object
 │   ├── base_page.py
-│   ├── home_page.py             # главная страница (лого, язык, поиск, меню)
-│   ├── footer_page.py           # футер сайта (контакты, ссылки, соцсети)
-│   ├── auth_page.py             # авторизация -  роли, форма, валидация
+│   ├── home_page.py               # главная страница - лого, язык, поиск, меню
+│   ├── footer_page.py             # футер сайта -  контакты, ссылки, соцсети
+│   ├── auth_page.py               # авторизация: роли, форма, валидация
 │   └── server_validation_page.py  # перехват /v1/accounts/sign-in с подменой username
 │
 ├── tests/
@@ -85,6 +88,7 @@
 │   └── test_server_validation.py  # серверная валидация для соискателя и работодателя
 │
 └── docs/allure/                   # скриншоты отчёта
+```
 
 
 ##  Быстрый старт

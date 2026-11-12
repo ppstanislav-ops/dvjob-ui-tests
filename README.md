@@ -45,52 +45,47 @@
 
 - **Python 3.12+**
 - **Playwright** — браузерная автоматизация (Chromium)
-- **pytest** — тестовый runner
+- **pytest** — тестовый раннер
 - **pytest-playwright** — интеграция Playwright с pytest
 - **pytest-rerunfailures** — один ретрай для flaky-тестов (`--reruns 1`)
-- **Allure Framework** — HTML-отчётность с шагами, скриншотами и аттачами
+- **Allure Framework** — HTML-отчётность с шагами и скриншотами
 - **python-dotenv** — хранение учётных данных в `.env`
 
 ## Покрытие (64 кейса)
 
-| Модуль | Кейсов | Что проверяется |
+| Модуль               | Кол-во кейсов |    Что проверяется |
 | --- | ---: | --- |
-| `test_main_page.py` | 13 | заголовок, логотип, переключение языков, поиск вакансий/резюме, промо, чат поддержки |
-| `test_upper_menu.py` | 6 | меню «Соискателям» и «Работодателям» -  каталоги, советы, формы, авторизация для консультаций |
-| `test_footer.py` | 21 | ссылки, телефон/e-mail, адрес, копирайт, соцсети, отсутствие пустых ссылок в футере |
-| `test_auth.py` | 4 | вход соискателя и работодателя (позитив/негатив) |
-| `test_server_validation.py` | 22 | серверная валидация `username` (10 значений × 2 роли) |
+| `test_main_page.py`    | 13 |              заголовок, логотип, переключение языков, поиск вакансий/резюме, промо, чат поддержки |
+| `test_upper_menu.py`   | 6 |               меню «Соискателям» и «Работодателям» -  каталоги, советы, формы, авторизация для консультаций |
+| `test_footer.py`      | 21 |               ссылки, телефон/e-mail, адрес, копирайт, соцсети, отсутствие пустых ссылок в футере |
+| `test_auth.py`         | 4 |               вход соискателя и работодателя (позитив/негатив) |
+| `test_server_validation.py` | 22 |         серверная валидация `username` (10 значений × 2 роли) |
+
 
 ##  Структура проекта
 
-conftest.py
-    # фикстуры: home, footer, auth, validation_page
-    # автоскрин при падении теста
-    # генерация environment.properties / executor.json / categories.json (Allure)
-pytest.ini
-    # --alluredir, --reruns 1
-requirements.txt
-.env.example
-    # скопировать в .env и заполнить креды
+.
+├── conftest.py                  # фикстуры, автоскриншот при падении, файлы окружения для Allure
+├── pytest.ini                   # настройки pytest
+├── requirements.txt             # зависимости
+├── .env.example                 # шаблон для .env
+│
+├── pages/                       # Page Object
+│   ├── base_page.py
+│   ├── home_page.py             # главная страница (лого, язык, поиск, меню)
+│   ├── footer_page.py           # футер сайта (контакты, ссылки, соцсети)
+│   ├── auth_page.py             # авторизация -  роли, форма, валидация
+│   └── server_validation_page.py  # перехват /v1/accounts/sign-in с подменой username
+│
+├── tests/
+│   ├── test_main_page.py
+│   ├── test_footer.py
+│   ├── test_upper_menu.py
+│   ├── test_auth.py
+│   └── test_server_validation.py  # серверная валидация для соискателя и работодателя
+│
+└── docs/allure/                   # скриншоты отчёта
 
-pages/                  # Page Object Layer
-    base_page.py        # родительский класс всех страниц
-    home_page.py        # главная -  лого, переключение языка, поиск, верхнее меню
-    footer_page.py      # футер -  контакты, ссылки, соцсети
-    auth_page.py        # роли + форма входа + клиентская валидация
-    server_validation_page.py
-                        # перехват POST /v1/accounts/sign-in, подмена username
-                        
-
-tests/
-    test_main_page.py
-    test_footer.py
-    test_upper_menu.py
-    test_auth.py
-    test_server_validation.py
-                        # security-валидация: 2 роли — соискатель и работодатель
-
-docs/allure/            # скрины Allure-отчёта для README
 
 ##  Быстрый старт
 
@@ -110,7 +105,7 @@ playwright install chromium
 
 ```bash
 cp .env.example .env
-# Откройте .env и впишите валидные логины/пароли тестовых аккаунтов dvjob.kz:
+#   Откройте .env и впишите валидные логины/пароли тестовых аккаунтов dvjob.kz:
 #   CandidateLogin, CandidatePassword       — тестовый аккаунт соискателя
 #   EmployerLogin, EmployerPassword          — тестовый аккаунт работодателя
 ```

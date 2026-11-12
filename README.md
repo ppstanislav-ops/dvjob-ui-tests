@@ -62,8 +62,6 @@
 | `test_server_validation.py` | 22 |         серверная валидация `username` (10 значений × 2 роли) |
 
 
-##  Структура проекта
-
 ## Структура проекта
 
 ```text
@@ -149,21 +147,21 @@ allure open allure-report
 ### Серверная валидация через route-interception
 В `ServerValidationAuthPage.setup_username_interception()` регистрируется `page.route(...)` на `/v1/accounts/sign-in`. Фронт всегда отправляет валидный email через форму; перехват подменяет поле `username` в JSON-теле на подозрительное значение. Так проверяется именно серверная валидация, а не фронтовая.
 
-### Security-кейсы (10 параметризованных + 1 known-vulnerability)
-- Несуществующий / неформатный / омоглифный email → `404 account_not_found`
+### Security-кейсы (10 параметризованных тестов)
+- Несуществующий / неформатный / омоглифный email ожидаем ответ бэкенда `404 account_not_found`
 - SQL-инъекция (`' OR 1=1 --`) - ожидаем ответ бэкенда `404 account_not_found`
 - XSS-payload (`<script>alert(1)</script>`) - ожидаем ответ бэкенда `404 account_not_found`
 - Превышение длины username (10 000 символов) - ожидаем ответ бэкенда `404 account_not_found`
-- Пустой / только пробелы → `422 validation_error`.
+- Пустое поле / только пробелы ожидаем ответ бэкенда `422 validation_error`.
 
 
 ### Allure-интеграция
 - `pytest_sessionfinish` генерирует `environment.properties` (Base URL, браузер, стенд, Python, OS), `executor.json` (build name/order) и `categories.json` (Баги продукта / Проблемы теста / Skipped).
 - `.build_order` — сквозной номер билда, чтобы во вкладке **Trends** были разные точки.
-- `screenshot_on_failure` — автоскриншот, HTML и URL страницы при падении теста.
+- `screenshot_on_failure` — автоскриншот при падении теста.
 
 ### Ретраи
-`pytest.ini` → `--reruns 1` (через `pytest-rerunfailures`): один ретрай для устойчивости к flaky на production-стенде.
+`pytest.ini` - `--reruns 1` (через `pytest-rerunfailures`) -  один ретрай для устойчивости тестов на проде.
 
 ---
 
